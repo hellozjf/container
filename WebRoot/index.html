@@ -7,11 +7,24 @@
     <title>集装箱可视化</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
-	<link rel="stylesheet" href="css/navbar.css">
     <script src="js/jquery-3.1.1.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/echarts.js"></script>
     <script src="js/china.js"></script>
+    <script src="js/highcharts.src.js"></script>
+    <script src="js/highcharts-3d.src.js"></script>
+    <script src="js/data.src.js"></script>
+    <script src="js/drilldown.src.js"></script>
+    <script src="js/exporting.src.js"></script>
+    <script src="js/map.src.js"></script>
+    <script src="js/cn-china.js"></script>
+    <!--<script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>-->
+    <!--<script src="http://cdn.hcharts.cn/highcharts/highcharts-3d.js"></script>-->
+    <!--<script src="http://cdn.hcharts.cn/highmaps/modules/map.js"></script>-->
+    <!--<script src="http://cdn.hcharts.cn/highmaps/modules/data.js"></script>-->
+    <!--<script src="http://cdn.hcharts.cn/highmaps/modules/drilldown.js"></script>-->
+    <!--<script src="http://cdn.hcharts.cn/highmaps/modules/exporting.js"></script>-->
+    <!--<script src="http://sandbox.runjs.cn/uploads/rs/228/zroo4bdf/cn-china-by-peng8.js"></script>-->
 </head>
 <body>
 <div class="container">
@@ -31,28 +44,252 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">从业人员总量监测</a></li>
-                    <li><a href="#">从业人员流动率</a></li>
-                    <li><a href="#">平均作业天数</a></li>
-                    <li><a href="#">作业人员籍贯分布</a></li>
-                    <li><a href="#">累计作业人员占比</a></li>
+                    <li class="active"><a href="#tab1" data-toggle="tab" onclick="showChart1();">从业人员总量监测</a></li>
+                    <li><a href="#tab2" data-toggle="tab" onclick="showChart2();">从业人员流动率</a></li>
+                    <li><a href="#tab3" data-toggle="tab" onclick="showChart3();">平均作业天数</a></li>
+                    <li><a href="#tab4" data-toggle="tab" onclick="showChart4();">作业人员籍贯分布</a></li>
+                    <li><a href="#tab5" data-toggle="tab">累计作业人员占比</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
     </nav>
 
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron" id="main" style="width:800px;height:600px;margin-left:auto;margin-right:auto;"></div>
+    <div class="tab-content" id="tabs">
+
+        <!-- 从业人员总量检测 -->
+        <div class="tab-pane active" id="tab1">
+            <div class="col-md-9" id="chart1" style="height:600px;"></div>
+            <div class="col-md-3">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="tab1-select-year">选择年份</label>
+                        <select id="tab1-select-year">
+                            <option>2015</option>
+                            <option>2016</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tab1-select-month">选择月份</label>
+                        <select id="tab1-select-month">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+                    </div>
+                    <button id="btnChart1" type="button" class="btn btn-default" onclick="showChart1()">查看</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 从业人员流动率 -->
+        <div class="tab-pane" id="tab2">
+            <div class="col-md-9" id="chart2" style="height:600px;"></div>
+            <div class="col-md-3">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="tab2-select-year">选择年份</label>
+                        <select id="tab2-select-year">
+                            <option>2015</option>
+                            <option>2016</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tab2-select-month">选择月份</label>
+                        <select id="tab2-select-month">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+                    </div>
+                    <button id="btnChart2" type="button" class="btn btn-default" onclick="showChart2()">查看</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 平均作业天数 -->
+        <div class="tab-pane" id="tab3">
+            <div class="col-md-9" id="chart3" style="height:600px;"></div>
+            <div class="col-md-3">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="tab3-select-year">选择年份</label>
+                        <select id="tab3-select-year">
+                            <option>2015</option>
+                            <option>2016</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tab3-select-month">选择月份</label>
+                        <select id="tab3-select-month">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+                    </div>
+                    <button id="btnChart3" type="button" class="btn btn-default" onclick="showChart3()">查看</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 平均作业天数 -->
+        <div class="tab-pane" id="tab4">
+            <div class="col-md-9" id="chart4" style="height:600px;"></div>
+            <div class="col-md-3">
+                <form role="form">
+                    <div class="form-group">
+                        <label class="checkbox-inline">
+                            <input type="radio" name="radioMethodOptions" id="radioMethodMap" value="map"
+                                   onclick="showChart4();" checked> 地图展示
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="radio" name="radioMethodOptions" id="radioMethodPie" value="pie"
+                                   onclick="showChart4();"> 饼图展示
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="jumbotron tab-pane" id="tab5"
+             style="width:800px;height:600px;margin-left:auto;margin-right:auto;"></div>
+    </div>
 
 </div> <!-- /container -->
 
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
 <script type="text/javascript">
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
 
-    // 指定图表的配置项和数据
-    var option = {
+    // 图表1
+    var option1 = {
+        color: ['#3398DB'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            data: [],
+            axisTick: {
+                alignWithLabel: true
+            }
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: '直接访问',
+                type: 'bar',
+                barWidth: '60%',
+                data: []
+            }
+        ]
+    };
+    // 图表2
+    var option2 = {
+        color: ['#3398DB'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            data: [],
+            axisTick: {
+                alignWithLabel: true
+            }
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: '直接访问',
+                type: 'bar',
+                barWidth: '60%',
+                data: []
+            }
+        ]
+    };
+    // 图表3
+    var option3 = {
+        color: ['#3398DB'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            data: [],
+            axisTick: {
+                alignWithLabel: true
+            }
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: '直接访问',
+                type: 'bar',
+                barWidth: '60%',
+                data: []
+            }
+        ]
+    };
+    // 图表4，地图
+    var option4_map = {
         visualMap: {
             min: 0,
             max: 2500,
@@ -64,17 +301,294 @@
         series: [{
             type: 'map',
             map: 'china',
-            data: [
-                {name: '浙江', value: 100},
-                {name: '广东', value: 200},
-                {name: '江苏', value: 300},
-                {name: '新疆', value: 400}
-            ]
+            data: []
         }]
     };
 
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
+    // 自定义的函数
+    function showChart1() {
+        var year = parseInt($('#tab1-select-year').val());
+        var month = parseInt($('#tab1-select-month').val());
+        var xAxisData = [];
+        var seriesData = [];
+        for (var i = year - 1; i <= year; i++) {
+            if (i == year - 1) {
+                for (var j = month + 1; j <= 12; j++) {
+                    xAxisData.push(i + '年' + j + '月');
+                    seriesData.push(Math.random() * 100);
+                }
+            } else {
+                for (var j = 1; j <= month; j++) {
+                    xAxisData.push(i + '年' + j + '月');
+                    seriesData.push(Math.random() * 100);
+                }
+            }
+        }
+        $('#chart1').highcharts({
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: '从业人员检测'
+            },
+            subtitle: {
+                text: year + '年' + month + '月'
+            },
+            xAxis: {
+                categories: xAxisData
+            },
+            yAxis: {
+                title: {
+                    text: '人数'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: false
+                }
+            },
+            series: [{
+//                name: 'Tokyo',
+                data: seriesData
+            }]
+        });
+    }
+
+    function showChart2() {
+        var year = parseInt($('#tab2-select-year').val());
+        var month = parseInt($('#tab2-select-month').val());
+        var xAxisData = [];
+        var seriesData = [];
+        for (var i = year - 1; i <= year; i++) {
+            if (i == year - 1) {
+                for (var j = month + 1; j <= 12; j++) {
+                    xAxisData.push(i + '年' + j + '月');
+                    seriesData.push(Math.random());
+                }
+            } else {
+                for (var j = 1; j <= month; j++) {
+                    xAxisData.push(i + '年' + j + '月');
+                    seriesData.push(Math.random());
+                }
+            }
+        }
+        option2.xAxis.data = xAxisData;
+        option2.series[0].data = seriesData;
+        chart2.setOption(option2);
+    }
+
+    function showChart3() {
+        chart3 = echarts.init($('#chart3')[0]);
+        var year = parseInt($('#tab3-select-year').val());
+        var month = parseInt($('#tab3-select-month').val());
+        var xAxisData = [];
+        var seriesData = [];
+        for (var i = year - 1; i <= year; i++) {
+            if (i == year - 1) {
+                for (var j = month + 1; j <= 12; j++) {
+                    xAxisData.push(i + '年' + j + '月');
+                    seriesData.push(Math.random() * 30);
+                }
+            } else {
+                for (var j = 1; j <= month; j++) {
+                    xAxisData.push(i + '年' + j + '月');
+                    seriesData.push(Math.random() * 30);
+                }
+            }
+        }
+        option3.xAxis.data = xAxisData;
+        option3.series[0].data = seriesData;
+        chart3.setOption(option3);
+    }
+
+    function showChart4() {
+        if ($("input[name='radioMethodOptions']:checked").val() == "map") {
+            var data = Highcharts.geojson(Highcharts.maps['countries/cn/custom/cn-all-china']);
+//            var small = $('#chart4').width() < 400;
+            $.each(data, function (i) {
+                this.drilldown = this.properties['drill-key'];
+                this.value = i;
+            });
+
+            $('#chart4').highcharts('Map', {
+                chart: {
+                    events: {
+                        drilldown: function (e) {
+                            if (!e.seriesOptions) {
+                                var chart = this;
+                                var cname = e.point.properties["cn-name"];
+                                chart.showLoading('<i class="icon-spinner icon-spin icon-3x"></i>');
+                                // 加载城市数据
+                                $.ajax({
+                                    type: "GET",
+                                    url: "http://data.hcharts.cn/jsonp.php?filename=GeoMap/json/" + e.point.drilldown + ".geo.json",
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: 'jsonp',
+                                    crossDomain: true,
+                                    success: function (json) {
+                                        data = Highcharts.geojson(json);
+
+                                        $.each(data, function (i) {
+
+                                            // 每个市的数据
+//                                            this.value = i;
+//                                            this.events = {};
+
+                                        });
+                                        chart.hideLoading();
+
+                                        chart.addSeriesAsDrilldown(e.point, {
+                                            name: e.point.name,
+                                            data: data,
+                                            events: {
+                                                show: function () {
+                                                    alert(1);
+                                                }
+                                            },
+                                            dataLabels: {
+                                                enabled: true,
+                                                format: '{point.name}'
+                                            }
+                                        });
+                                    },
+                                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                                    }
+                                });
+                            }
+                            this.setTitle(null, {text: cname});
+                        },
+                        drillup: function () {
+                            this.setTitle(null, {text: '中国'});
+                        }
+                    }
+                },
+                title: {
+                    text: '作业人员籍贯分布'
+                },
+                subtitle: {
+                    text: '中国',
+                    floating: true,
+                    align: 'right',
+                    y: 50,
+                    style: {
+                        fontSize: '16px'
+                    }
+                },
+                tooltip: {
+                    formatter: function () {
+                        var htm = "中国<br/>";
+
+                        if (this.point.drilldown) {
+                            htm += this.point.properties["cn-name"];
+                        } else {
+                            htm += this.point.name;
+                        }
+                        htm += ":" + this.point.value;
+                        return htm;
+
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+                },
+                colorAxis: {
+                    min: 0,
+                    minColor: '#FFFFFF',
+                    maxColor: '#3398DB'
+                },
+                mapNavigation: {
+                    enabled: true,
+                    buttonOptions: {
+                        verticalAlign: 'bottom'
+                    }
+                },
+                plotOptions: {
+                    map: {
+                        states: {
+                            hover: {
+                                color: '#EEDD66'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    data: data,
+                    name: '中国',
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.properties.cn-name}'
+                    }
+                }],
+                drilldown: {
+                    //series: drilldownSeries,
+                    activeDataLabelStyle: {
+                        color: '#FFFFFF',
+                        textDecoration: 'none',
+                        textShadow: '0 0 3px #000000'
+                    },
+                    drillUpButton: {
+                        relativeTo: 'spacingBox',
+                        position: {
+                            x: 0,
+                            y: 60
+                        }
+                    }
+                }
+            });
+        } else {
+            var provinces = ['北京', '天津', '上海', '重庆', '河北', '河南', '云南', '辽宁', '黑龙江', '湖南', '安徽', '山东', '新疆', '江苏', '浙江', '江西', '湖北', '广西', '甘肃', '山西', '内蒙古', '陕西', '吉林', '福建', '贵州', '广东', '青海', '西藏', '四川', '宁夏', '海南', '台湾'];
+            var data = [];
+            for (var i = 0; i < provinces.length; i++) {
+                var d = [];
+                d.push(provinces[i]);
+                d.push(i);
+                data.push(d);
+            }
+            $('#chart4').highcharts({
+                chart: {
+                    type: 'pie',
+                    options3d: {
+                        enabled: true,
+                        alpha: 45,
+                        beta: 0
+                    }
+                },
+                title: {
+                    text: '作业人员籍贯分布'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        depth: 35,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Browser share',
+                    data: data
+                }]
+            });
+        }
+    }
+
+    // 主入口函数
+    $(function () {
+        showChart1();
+    });
 </script>
 </body>
 </html>
