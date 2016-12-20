@@ -229,15 +229,33 @@
             if (i == year - 1) {
                 for (var j = month + 1; j <= 12; j++) {
                     xAxisData.push(i + '年' + j + '月');
-                    seriesData.push(Math.random() * 100);
+                    //seriesData.push(Math.random() * 100);
                 }
             } else {
                 for (var j = 1; j <= month; j++) {
                     xAxisData.push(i + '年' + j + '月');
-                    seriesData.push(Math.random() * 100);
+                    //seriesData.push(Math.random() * 100);
                 }
             }
         }
+
+        $.ajax({
+            type: "POST",
+            url: "NumPersonServlet"
+            data: {
+                year:year,
+                month:month
+            },
+            dataType:"json",
+            success:function(returnMsg) {
+                console.log(returnMsg);
+                seriesData = returnMsg;
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(textStatus + errorThrown);
+				return false;
+			}
+        });
 
         $('#chart1').highcharts({
             chart: {
