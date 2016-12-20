@@ -247,8 +247,9 @@
                 month:month
             },
             dataType:"json",
+            async : false,
             success:function(returnMsg) {
-                console.log(returnMsg);
+                <!--console.log(returnMsg);-->
                 seriesData = returnMsg;
             },
             error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -291,15 +292,34 @@
             if (i == year - 1) {
                 for (var j = month + 1; j <= 12; j++) {
                     xAxisData.push(i + '年' + j + '月');
-                    seriesData.push(Math.random());
+                    <!--seriesData.push(Math.random());-->
                 }
             } else {
                 for (var j = 1; j <= month; j++) {
                     xAxisData.push(i + '年' + j + '月');
-                    seriesData.push(Math.random());
+                    <!--seriesData.push(Math.random());-->
                 }
             }
         }
+
+        $.ajax({
+            type: "POST",
+            url: ""
+            data: {
+                year:year,
+                month:month
+            },
+            dataType:"json",
+            async : false,
+            success:function(returnMsg) {
+                <!--console.log(returnMsg);-->
+                seriesData = returnMsg;
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(textStatus + errorThrown);
+				return false;
+			}
+        });
 
         $('#chart2').highcharts({
             chart: {
@@ -335,15 +355,34 @@
             if (i == year - 1) {
                 for (var j = month + 1; j <= 12; j++) {
                     xAxisData.push(i + '年' + j + '月');
-                    seriesData.push(Math.random() * 30);
+                    <!--seriesData.push(Math.random() * 30);-->
                 }
             } else {
                 for (var j = 1; j <= month; j++) {
                     xAxisData.push(i + '年' + j + '月');
-                    seriesData.push(Math.random() * 30);
+                    <!--seriesData.push(Math.random() * 30);-->
                 }
             }
         }
+
+        $.ajax({
+            type: "POST",
+            url: ""
+            data: {
+                year:year,
+                month:month
+            },
+            dataType:"json",
+            async : false,
+            success:function(returnMsg) {
+                <!--console.log(returnMsg);-->
+                seriesData = returnMsg;
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(textStatus + errorThrown);
+				return false;
+			}
+        });
 
         $('#chart3').highcharts({
             chart: {
@@ -371,12 +410,31 @@
     }
 
     function showChart4() {
+
+        var seriesData = [];
+        $.ajax({
+            type: "POST",
+            url: ""
+            data: {
+            },
+            dataType:"json",
+            async : false,
+            success:function(returnMsg) {
+                <!--console.log(returnMsg);-->
+                seriesData = returnMsg;
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(textStatus + errorThrown);
+				return false;
+			}
+        });
+
         if ($("input[name='radioMethodOptions']:checked").val() == "map") {
             var data = Highcharts.geojson(Highcharts.maps['countries/cn/custom/cn-all-china']);
 //            var small = $('#chart4').width() < 400;
             $.each(data, function (i) {
                 this.drilldown = this.properties['drill-key'];
-                this.value = i;
+                this.value = seriesData[i];
             });
 
             $('#chart4').highcharts('Map', {
@@ -508,12 +566,12 @@
                 }
             });
         } else {
-            var provinces = ['北京', '天津', '上海', '重庆', '河北', '河南', '云南', '辽宁', '黑龙江', '湖南', '安徽', '山东', '新疆', '江苏', '浙江', '江西', '湖北', '广西', '甘肃', '山西', '内蒙古', '陕西', '吉林', '福建', '贵州', '广东', '青海', '西藏', '四川', '宁夏', '海南', '台湾'];
+            var provinces = ['上海','浙江','西沙群岛','澳门','台湾','甘肃','香港','宁夏','陕西','安徽','湖北','广东','福建','北京','河北','山东','天津','江苏','海南','青海','吉林','西藏','新疆','河南','内蒙古','黑龙江','云南','广西','辽宁','四川','重庆','贵州','湖南','山西','江西'];
             var data = [];
             for (var i = 0; i < provinces.length; i++) {
                 var d = [];
                 d.push(provinces[i]);
-                d.push(i);
+                d.push(seriesData[i]);
                 data.push(d);
             }
             $('#chart4').highcharts({
@@ -555,7 +613,25 @@
         var year = parseInt($('#tab5-select-year').val());
         var month = parseInt($('#tab5-select-month').val());
         var xAxisData = ['1-7天', '8-14天', '15-21天', '21天以上'];
-        var seriesData = [40, 30, 20, 10];
+        var seriesData = [];
+
+        $.ajax({
+            type: "POST",
+            url: ""
+            data: {
+            },
+            dataType:"json",
+            async : false,
+            success:function(returnMsg) {
+                <!--console.log(returnMsg);-->
+                seriesData = returnMsg;
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(textStatus + errorThrown);
+				return false;
+			}
+        });
+
         var data = [];
         for (var i = 0; i < 4; i++) {
             var d = [];
