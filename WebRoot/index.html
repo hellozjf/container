@@ -27,7 +27,7 @@
     <!--<script src="http://sandbox.runjs.cn/uploads/rs/228/zroo4bdf/cn-china-by-peng8.js"></script>-->
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
 
     <!-- Static navbar -->
     <nav class="navbar navbar-default" role="navigation">
@@ -48,7 +48,7 @@
                     <li><a href="#tab2" data-toggle="tab" onclick="showChart2();">从业人员流动率</a></li>
                     <li><a href="#tab3" data-toggle="tab" onclick="showChart3();">平均作业天数</a></li>
                     <li><a href="#tab4" data-toggle="tab" onclick="showChart4();">作业人员籍贯分布</a></li>
-                    <li><a href="#tab5" data-toggle="tab">累计作业人员占比</a></li>
+                    <li><a href="#tab5" data-toggle="tab" onclick="showChart5();">累计作业人员占比</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -158,7 +158,7 @@
             </div>
         </div>
 
-        <!-- 平均作业天数 -->
+        <!-- 作业人员籍贯分布 -->
         <div class="tab-pane" id="tab4">
             <div class="col-md-9" id="chart4" style="height:600px;"></div>
             <div class="col-md-3">
@@ -168,6 +168,8 @@
                             <input type="radio" name="radioMethodOptions" id="radioMethodMap" value="map"
                                    onclick="showChart4();" checked> 地图展示
                         </label>
+                    </div>
+                    <div>
                         <label class="checkbox-inline">
                             <input type="radio" name="radioMethodOptions" id="radioMethodPie" value="pie"
                                    onclick="showChart4();"> 饼图展示
@@ -177,133 +179,45 @@
             </div>
         </div>
 
-        <div class="jumbotron tab-pane" id="tab5"
-             style="width:800px;height:600px;margin-left:auto;margin-right:auto;"></div>
+        <!-- 累积作业人员占比 -->
+        <div class="tab-pane" id="tab5">
+            <div class="col-md-9" id="chart5" style="height:600px;"></div>
+            <div class="col-md-3">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="tab5-select-year">选择年份</label>
+                        <select id="tab5-select-year">
+                            <option>2015</option>
+                            <option>2016</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tab5-select-month">选择月份</label>
+                        <select id="tab5-select-month">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+                    </div>
+                    <button id="btnChart5" type="button" class="btn btn-default" onclick="showChart5()">查看</button>
+                </form>
+            </div>
+        </div>
     </div>
 
 </div> <!-- /container -->
 
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
 <script type="text/javascript">
-
-    // 图表1
-    var option1 = {
-        color: ['#3398DB'],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'category',
-            data: [],
-            axisTick: {
-                alignWithLabel: true
-            }
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [
-            {
-                name: '直接访问',
-                type: 'bar',
-                barWidth: '60%',
-                data: []
-            }
-        ]
-    };
-    // 图表2
-    var option2 = {
-        color: ['#3398DB'],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'category',
-            data: [],
-            axisTick: {
-                alignWithLabel: true
-            }
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [
-            {
-                name: '直接访问',
-                type: 'bar',
-                barWidth: '60%',
-                data: []
-            }
-        ]
-    };
-    // 图表3
-    var option3 = {
-        color: ['#3398DB'],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'category',
-            data: [],
-            axisTick: {
-                alignWithLabel: true
-            }
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [
-            {
-                name: '直接访问',
-                type: 'bar',
-                barWidth: '60%',
-                data: []
-            }
-        ]
-    };
-    // 图表4，地图
-    var option4_map = {
-        visualMap: {
-            min: 0,
-            max: 2500,
-            left: 'left',
-            top: 'bottom',
-            text: ['高', '低'],           // 文本，默认为数值文本
-            calculable: true
-        },
-        series: [{
-            type: 'map',
-            map: 'china',
-            data: []
-        }]
-    };
 
     // 自定义的函数
     function showChart1() {
@@ -324,12 +238,13 @@
                 }
             }
         }
+
         $('#chart1').highcharts({
             chart: {
-                type: 'line'
+                type: 'line',
             },
             title: {
-                text: '从业人员检测'
+                text: '从业人员总量监测'
             },
             subtitle: {
                 text: year + '年' + month + '月'
@@ -342,16 +257,8 @@
                     text: '人数'
                 }
             },
-            plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: true
-                    },
-                    enableMouseTracking: false
-                }
-            },
             series: [{
-//                name: 'Tokyo',
+                name: '从业人员总量',
                 data: seriesData
             }]
         });
@@ -375,13 +282,33 @@
                 }
             }
         }
-        option2.xAxis.data = xAxisData;
-        option2.series[0].data = seriesData;
-        chart2.setOption(option2);
+
+        $('#chart2').highcharts({
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: '从业人员流动率'
+            },
+            subtitle: {
+                text: year + '年' + month + '月'
+            },
+            xAxis: {
+                categories: xAxisData
+            },
+            yAxis: {
+                title: {
+                    text: '人数'
+                }
+            },
+            series: [{
+                name: '从业人员流动率',
+                data: seriesData
+            }]
+        });
     }
 
     function showChart3() {
-        chart3 = echarts.init($('#chart3')[0]);
         var year = parseInt($('#tab3-select-year').val());
         var month = parseInt($('#tab3-select-month').val());
         var xAxisData = [];
@@ -399,9 +326,30 @@
                 }
             }
         }
-        option3.xAxis.data = xAxisData;
-        option3.series[0].data = seriesData;
-        chart3.setOption(option3);
+
+        $('#chart3').highcharts({
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: '平均作业天数'
+            },
+            subtitle: {
+                text: year + '年' + month + '月'
+            },
+            xAxis: {
+                categories: xAxisData
+            },
+            yAxis: {
+                title: {
+                    text: '人数'
+                }
+            },
+            series: [{
+                name: '平均作业天数',
+                data: seriesData
+            }]
+        });
     }
 
     function showChart4() {
@@ -583,6 +531,56 @@
                 }]
             });
         }
+    }
+
+    function showChart5() {
+        var year = parseInt($('#tab5-select-year').val());
+        var month = parseInt($('#tab5-select-month').val());
+        var xAxisData = ['1-7天', '8-14天', '15-21天', '21天以上'];
+        var seriesData = [40, 30, 20, 10];
+        var data = [];
+        for (var i = 0; i < 4; i++) {
+            var d = [];
+            d.push(xAxisData[i]);
+            d.push(seriesData[i]);
+            data.push(d);
+        }
+
+        $('#chart5').highcharts({
+            chart: {
+                type: 'pie',
+                options3d: {
+                    enabled: true,
+                    alpha: 45,
+                    beta: 0
+                }
+            },
+            title: {
+                text: '累计作业人员占比'
+            },
+            subtitle: {
+                text: year + '年' + month + '月'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    depth: 35,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}'
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                data: data
+            }]
+        });
     }
 
     // 主入口函数
