@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0"> 
+  <display-name>Archetype Created Web Application</display-name>
+  <welcome-file-list>
+  	<welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  	<servlet-name>NumPersonServlet</servlet-name>
+  	<servlet-class>com.zju.homework.servlet.NumPersonServlet</servlet-class>
+  </servlet>
+ <servlet-mapping>
+  	<servlet-name>NumPersonServlet</servlet-name>
+  	<url-pattern>/NumPersonServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>AverageWorkdayServlet</servlet-name>
+  	<servlet-class>com.zju.homework.servlet.AverageWorkdayServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>AverageWorkdayServlet</servlet-name>
+  	<url-pattern>/AverageWorkdayServlet</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>NumOfChangeServlet</servlet-name>
+  	<servlet-class>com.zju.homework.servlet.NumOfChangeServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>NumOfChangeServlet</servlet-name>
+  	<url-pattern>/NumOfChangeServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+    <servlet>
+  	<servlet-name>NativeOfPersonServlet</servlet-name>
+  	<servlet-class>com.zju.homework.servlet.NativeOfPersonServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>NativeOfPersonServlet</servlet-name>
+  	<url-pattern>/NativeOfPersonServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>NumOfWorkServlet</servlet-name>
+  	<servlet-class>com.zju.homework.servlet.NumOfWorkServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>NumOfWorkServlet</servlet-name>
+  	<url-pattern>/NumOfWorkServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
