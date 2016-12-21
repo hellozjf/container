@@ -37,9 +37,9 @@ public class NativeOfPersonServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/heml;chartset=utf-8");
 		JsonArrayBuilder json = bf.createArrayBuilder();
-		String[] array = {"ÉÏº£","Õã½­","Î÷É³Èºµº","°ÄÃÅ","Ì¨Íå","¸ÊËà","Ïã¸Û","ÄşÏÄ","ÉÂÎ÷","°²»Õ",
-				"ºş±±","¹ã¶«","¸£½¨","±±¾©","ºÓ±±","É½¶«","Ìì½ò","½­ËÕ","º£ÄÏ","Çàº£","¼ªÁÖ","Î÷²Ø","ĞÂ½®",
-				"ºÓÄÏ","ÄÚÃÉ¹Å","ºÚÁú½­","ÔÆÄÏ","¹ãÎ÷","ÁÉÄş","ËÄ´¨","ÖØÇì","¹óÖİ","ºşÄÏ","É½Î÷","½­Î÷"};
+		String[] array = {"ä¸Šæµ·","æµ™æ±Ÿ","è¥¿æ²™ç¾¤å²›","æ¾³é—¨","å°æ¹¾","ç”˜è‚ƒ","é¦™æ¸¯","å®å¤","é™•è¥¿","å®‰å¾½",
+				"æ¹–åŒ—","å¹¿ä¸œ","ç¦å»º","åŒ—äº¬","æ²³åŒ—","å±±ä¸œ","å¤©æ´¥","æ±Ÿè‹","æµ·å—","é’æµ·","å‰æ—","è¥¿è—","æ–°ç–†",
+				"æ²³å—","å†…è’™å¤","é»‘é¾™æ±Ÿ","äº‘å—","å¹¿è¥¿","è¾½å®","å››å·","é‡åº†","è´µå·","æ¹–å—","å±±è¥¿","æ±Ÿè¥¿"};
 		for (String a :array)
 		{
 			p.setBirthPlace(a);

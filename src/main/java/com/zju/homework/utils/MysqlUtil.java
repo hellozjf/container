@@ -9,9 +9,9 @@ import java.sql.SQLException;
 
 public class MysqlUtil {
 	private static String driver = "com.mysql.jdbc.Driver";
-	private static String url = "jdbc:mysql://127.0.0.1:3306/warehouse?useUnicode=true&characterEncoding=UTF-8";
-	private static String user = "root";
-	private static String pwd = "root";
+	private static String url = "jdbc:mysql://aliyun.hellozjf.com:3306/container?useUnicode=true&characterEncoding=UTF-8";
+	private static String user = "container";
+	private static String pwd = "Zjf@1234";
 
 	static{
 		try {

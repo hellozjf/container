@@ -12,7 +12,7 @@ import com.zju.homework.dao.NumofPersonEachMonth;
 
 public class BaseService {
 	
-		public static int NUM = 3098;/*ËùÓĞ´ÓÒµÈËÔ±ÊıÁ¿*/
+		public static int NUM = 3098;/*æ‰€æœ‰ä»ä¸šäººå‘˜æ•°é‡*/
 
 		DateofWork date;
 		Person person;
@@ -42,26 +42,26 @@ public class BaseService {
 		
 		
 		
-		public int numofPersonMonthOfYear()/*¼ÆËãµ±ÔÂµÄÔÚÖ°ÈËÊı*/
+		public int numofPersonMonthOfYear()/*è®¡ç®—å½“æœˆçš„åœ¨èŒäººæ•°*/
 		{
 			return num;
 		}
 		
-		public double getRateofChange()/*¼ÆËãµ±ÔÂµÄ±ä¶¯ÈËÊıÕ¼±È*/
+		public double getRateofChange()/*è®¡ç®—å½“æœˆçš„å˜åŠ¨äººæ•°å æ¯”*/
 		{
 			nc = new NumberOfChangeEachMonth();
 			double rc = nc.rateOfPersonChange(date)/num;
 			return rc;
 		}
 		
-		public double getRateOfWork()/*¼ÆËãµ±ÔÂµÄ¹¤×÷ÌìÊıÕ¼±È*/
+		public double getRateOfWork()/*è®¡ç®—å½“æœˆçš„å·¥ä½œå¤©æ•°å æ¯”*/
 		{
 			nw = new NumOfWorkEachMonth();
 			double ro = nw.rateOfWorkPerson(date)/num;
 			return  ro;
 		}
 	
-		public double averageWorkday()/*¼ÆËãµ±ÔÂµÄÆ½¾ùÌìÊıÕ¼±È*/
+		public double averageWorkday()/*è®¡ç®—å½“æœˆçš„å¹³å‡å¤©æ•°å æ¯”*/
 		{
 			aw = new AverageWorkDaysEachMonth();
 			return aw.AverageWorkDays(date);
@@ -69,13 +69,13 @@ public class BaseService {
 		}
 
 	
-		public int nativePerson()/*¼ÆËãÈËÔ±¼®¹áµÄÊıÁ¿*/
+		public int nativePerson()/*è®¡ç®—äººå‘˜ç±è´¯çš„æ•°é‡*/
 		{
 			nop= new NativeOfPersonEachPlace();
 			return nop.Num_NativeOfPerson(person);
 		}
 		
-		public double nativePersonScale()/*¼ÆËãÈËÔ±¼®¹áµÄ±ÈÀı*/
+		public double nativePersonScale()/*è®¡ç®—äººå‘˜ç±è´¯çš„æ¯”ä¾‹*/
 		{
 			nop = new NativeOfPersonEachPlace();
 			return nop.Num_NativeOfPerson(person)/NUM;

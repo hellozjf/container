@@ -45,7 +45,7 @@ public class NumOfChangeServlet extends HttpServlet
 		
 		JsonArrayBuilder json = bf.createArrayBuilder();
 	
-		if(month1-12 < 0)
+		if(month1-12 <= 0)
 		{
 			
 			for(int i =month1+1; i<13;i++)

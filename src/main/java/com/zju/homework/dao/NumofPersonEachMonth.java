@@ -21,7 +21,6 @@ public class NumofPersonEachMonth {
 			 rs = stmt.executeQuery();
 			while(rs.next())
 			{
-				System.out.println(rs.getString(1));
 				num +=1;
 			}
 			
